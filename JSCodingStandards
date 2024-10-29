@@ -1,0 +1,9 @@
+JavaScript coding standards:
+* camelCase (i.e, firstName, lastName, numberPercent)
+* 2 space indentations
+* No trailing whitespace
+* Space before opening bracket
+* Line length < 80
+* Quotes around string values
+* Short objects can be compressed on one line
+
