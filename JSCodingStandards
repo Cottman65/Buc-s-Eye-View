@@ -1,5 +1,6 @@
 JavaScript coding standards:
-* camelCase (i.e, firstName, lastName, numberPercent)
+* camelCase (i.e, firstName, lastName, numberPercent
+* PascalCase for class names (e.g., Player, GameManager)
 * 2 space indentations
 * No trailing whitespace
 * Space before opening bracket
