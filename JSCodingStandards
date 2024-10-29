@@ -6,4 +6,4 @@ JavaScript coding standards:
 * Line length < 80 char
 * Quotes around string values
 * Short objects can be compressed on one line
-
+* .js for javascript files
