@@ -1,0 +1,57 @@
+Mandatory Features
+ These are essential for the game to function as designed, and must be implemented first.
+
+1. Score System:
+    - Top 10 Scores: Track the top 10 high scores across sessions.
+    - Score Calculation: Calculate score based on the time remaining divided by the number of correct guesses.
+    - Initials Collection: After reaching a top 10 score, prompt the player to enter their initials for the leaderboard.
+
+2. Timer:
+    - 5-Minute Timer: Players have 5 minutes to guess all images. Track time countdown and calculate penalties for running out of time.
+
+3. One Guess per Image:
+    - Each player can make only one guess per image, which prevents multiple attempts and maintains game difficulty.
+
+4. Guesser Mechanics:
+    - Multiple-Choice Options: Provide four options for each image—one correct answer and three incorrect answers randomly chosen.
+    - Unique Answer Selection: Ensure each multiple-choice question has four unique options without any duplicates.
+
+5. Daily Pictures:
+    - Five Unique Pictures Per Day: Display five unique images to players each day.
+   -  Image Bank Management: Use a pool of images from which five new images are pulled daily. Remove images already shown to avoid duplication.
+
+
+Optional Features (Non-Mandatory)
+ These features enhance the user experience but are not strictly required to meet the core functionality.
+
+1. Difficulty Modes:
+  - Adjustable Timer: Allow players to choose different difficulty modes, such as:
+      - Easy: 5 minutes.
+      - Medium: 60 seconds.
+      - Hard: 30 seconds.
+ - Picture Quality: Adjust the quality of the images based on the difficulty setting to add variation to the challenge.
+
+2. Zoom Feature:
+    - Zoom In/Out: Players can zoom in or out on each image to inspect details more closely, helping with guessing.
+
+3. Location Hints:
+    - Written Hints: Provide text-based hints to give players additional clues about the image location.
+    - Alternate View: Show another angle of the picture to provide more context.
+
+
+Non-Functional Requirements
+These requirements ensure the game is usable, accessible, and suitable for the intended audience.
+
+  1. Single-Player Game: No multiplayer option, but an AI mode could be added if desired.
+  2. Playable in Short Durations: Game rounds should be quick enough to be completed while walking between classes.
+  3. Platform Compatibility:
+      - Playable on a smartphone browser.
+      - Use of touch controls (tap, double-tap, swipe). Support for arrow keys is also recommended.
+
+Content Restrictions:
+  - No offensive or inappropriate content.
+  - No ads, malicious software, excessive flashing lights, or loud sounds.
+
+Game Size and Performance:
+  - Total file size must not exceed 10MB, including images, sounds, etc.
+  - Game canvas must be either 400x400 or 800x400 pixels.
