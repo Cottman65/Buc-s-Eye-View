@@ -1,6 +1,6 @@
 Code adhere to coding standards
 
-Code is tested
+Code is tested by Ian Gilley after code/task is done 
 
 Code adheres to our acceptance criteria
 
@@ -9,3 +9,5 @@ Product Owner approves of functionality
 Pushed to main
 
 Well documented
+- in-code comments 
+- project README
