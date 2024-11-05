@@ -4,7 +4,7 @@ JavaScript coding standards:
 * 2 space indentations
 * No trailing whitespace
 * Space before opening bracket
-* Line length < 80
+* Line length < 80 char
 * Quotes around string values
 * Short objects can be compressed on one line
-
+* .js for javascript files
