@@ -1,3 +1,9 @@
+/*
+This sets the color of the background, text, and sets the margins
+In this case that backGround is set to black, the text is set to white,
+and the magrins are set to z making the margins flush against the edges of the browser window
+*/
+
 body {
     background-color: black;
     color: white;
