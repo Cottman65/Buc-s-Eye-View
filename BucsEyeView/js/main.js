@@ -28,3 +28,20 @@ startButton.addEventListener("click", function() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     startButton.style.display = 'none';
 });
+
+const HowToPlayButton = document.getElementById("howToPlayButton");
+
+// Game canvas object
+const canvasHowTo = document.getElementById('gameCanvas');
+
+// Game canvas context
+const ctxHowTo = canvas.getContext('2d');
+
+// Shows "How To Play" instructions when called
+HowToPlayButton.addEventListener("click", function() {
+    // Clear the canvas and show instructions
+    ctxHowTo.fillStyle = 'blue';
+    ctxHowTo.fillRect(0,0, canvas.width, canvas.height);
+    // Optionally, hide the button after clicking
+    HowToPlayButton.style.display = 'none';
+});
