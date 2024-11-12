@@ -15,10 +15,6 @@ These make sure that the button are in the right place and become blue when pres
 
 */
 
-window.onload = function() {
-    alert("UwU");
-};
-
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();

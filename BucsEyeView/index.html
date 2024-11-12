@@ -15,20 +15,25 @@ The last section connects the webpage to an external javascript file.
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buc's Eye View</title>
+    <title>Buc Eye View</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
         <h1>Buc Eye View</h1>
     </header>
-    <canvas id="gameCanvas" width="800 px" height="400 px"></canvas>
-    <button id="startButton">Start</button>
+    
     <canvas id="gameCanvas" width="800" height="400"></canvas>
-    <button id="howToPlayButton">How To Play!</button>
+    
+    <div class="button-container">
+        <button id="startButton">Start</button>
+        <button id="howToPlayButton">How To Play!</button>
+    </div>
+    
     <footer>
         <p>&copy; 2024</p>
     </footer>
+    
     <script src="js/main.js"></script>
 </body>
 </html>
