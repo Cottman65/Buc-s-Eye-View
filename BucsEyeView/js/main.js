@@ -16,13 +16,13 @@ These make sure that the button are in the right place and become blue when pres
 */
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
+  anchor.addEventListener('click', function(e) {
+      e.preventDefault();
 
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+      });
+  });
 });
 
 // Menu button objects
@@ -33,58 +33,60 @@ const startGameButton = { x: 300, y: 300, width: 200, height: 50, text: "Continu
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
+// Array of image file paths (replace these with your actual file paths)
+const imagesArray = [
+    "assets/image.jpg",
+    "assets/image.jpg",
+    "assets/image.jpg",
+    "assets/image.jpg"
+];
+
+// Variable to track whether the game has started
+let gameStarted = false;
+
 // Function to resize the canvas
 function resizeCanvas() {
-  canvas.width = window.innerWidth * 0.8;
-  canvas.height = window.innerHeight * 0.6;
+    canvas.width = window.innerWidth * 0.8;
+    canvas.height = window.innerHeight * 0.6;
 }
-
-document.addEventListener("click", (event) => {
-  console.log(`Global click detected: x=${event.clientX}, y=${event.clientY}`);
-});
 
 // Draw menu to the canvas
 function drawMenu() {
+    ctx.fillStyle = "#00053E"; // Dark blue color
+    ctx.font = "40px Arial"; // Larger font for the title
+    ctx.textAlign = "center";
+    ctx.fillText("Buc Eye View", canvas.width / 2, 100); // Position at the top center of the canvas
 
-  // Draw the title
-  ctx.fillStyle = "#00053E"; // Dark blue color
-  ctx.font = "40px Arial"; // Larger font for the title
-  ctx.textAlign = "center";
-  ctx.fillText("Buc Eye View", canvas.width / 2, 100); // Position at the top center of the canvas
-  
-  ctx.textAlign = "start";
-  // Draw Start Game Button
-  ctx.fillStyle = "#00053E";
-  ctx.fillRect(startButton.x, startButton.y, startButton.width, startButton.height);
-  ctx.fillStyle = "#FFC72C";
-  ctx.font = "20px Arial";
-  ctx.fillText(startButton.text, startButton.x + 30, startButton.y + 30);
-
-
+    ctx.textAlign = "start";
+    // Draw Start Game Button
+    ctx.fillStyle = "#00053E";
+    ctx.fillRect(startButton.x, startButton.y, startButton.width, startButton.height);
+    ctx.fillStyle = "#FFC72C";
+    ctx.font = "20px Arial";
+    ctx.fillText(startButton.text, startButton.x + 30, startButton.y + 30);
 }
 
-// Draws instructions to the canvas
+// Draw instructions to the canvas
 function drawInstructions() {
+    ctx.fillStyle = "#00053E";
+    ctx.font = "30px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("How to Play", canvas.width / 2, 50);
 
-  ctx.fillStyle = "#00053E";
-  ctx.font = "30px Arial";
-  ctx.textAlign = "center";
-  ctx.fillText("How to Play", canvas.width / 2, 50);
+    // Instructions Text
+    ctx.font = "18px Arial";
+    ctx.textAlign = "left";
+    ctx.fillStyle = "#FFC72C";
 
-  // Instructions Text
-  ctx.font = "18px Arial";
-  ctx.textAlign = "left";
-  ctx.fillStyle = "#FFC72C";
+    const instructions = [
+        "You’ll see five unique images from around campus, and your goal is to identify the location",
+        "shown in each photo. With each image, you’ll find four multiple-choice options; tap on the one",
+        "that best matches the location. You only get one guess per image, so choose carefully!",
+        "Every day brings a new set of images for a fresh challenge, so come back daily",
+        "to test your campus knowledge."
+    ];
 
-  const instructions = [
-    "You’ll see five unique images from around campus, and your goal is to identify the location",
-     "shown in each photo. With each image, you’ll find four multiple-choice options; tap on the one",
-     "that best matches the location. You only get one guess per image, so choose carefully!",
-     "Every day brings a new set of images for a fresh challenge, so come back daily",
-     "to test your campus knowledge."
-  ];
-
-  let yPosition = 100; // Starting y position for instructions text
+    let yPosition = 100; // Starting y position for instructions text
 
     // Display each line with a gap between lines
     instructions.forEach(line => {
@@ -92,175 +94,100 @@ function drawInstructions() {
         yPosition += 30; // Increase y position for the next line
     });
 
-
-  // Draw instruction menu start button
-  ctx.fillStyle = "#00053E";
-  ctx.fillRect(startGameButton.x, startGameButton.y, startGameButton.width, startGameButton.height);
-  ctx.fillStyle = "#FFC72C";
-  ctx.fillText(startGameButton.text, startGameButton.x + 30, startGameButton.y + 30);
+    // Draw instruction menu start button
+    ctx.fillStyle = "#00053E";
+    ctx.fillRect(startGameButton.x, startGameButton.y, startGameButton.width, startGameButton.height);
+    ctx.fillStyle = "#FFC72C";
+    ctx.fillText(startGameButton.text, startGameButton.x + 30, startGameButton.y + 30);
 }
 
 // Initializes the game and shows game instructions when called
 function initializeGame() {
-    
     // Show the game screen
-  document.getElementById("gameScreen").style.display = "block";
+    document.getElementById("gameScreen").style.display = "block";
 
-  // Clear the canvas and displays instructions
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawInstructions();
+    // Clear the canvas and display instructions
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawInstructions();
+}
+
+// Function to load and display a random image
+function loadRandomImage() {
+    // Randomly select an image from the array
+    const randomIndex = Math.floor(Math.random() * imagesArray.length);
+    const selectedImage = imagesArray[randomIndex];
+
+    // Load and display the selected image
+    const img = new Image(); // Create a new image object
+    img.src = selectedImage; // Set the image source to the randomly selected image
+
+    img.onload = function () {
+        // Calculate scaling to fit the canvas while maintaining the aspect ratio
+        const aspectRatio = img.width / img.height;
+        let imgWidth = canvas.width;
+        let imgHeight = canvas.width / aspectRatio;
+
+        if (imgHeight > canvas.height) {
+            imgHeight = canvas.height;
+            imgWidth = canvas.height * aspectRatio;
+        }
+
+        const xOffset = (canvas.width - imgWidth) / 2;
+        const yOffset = (canvas.height - imgHeight) / 2;
+
+        // Draw the image centered on the canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear previous image
+        ctx.drawImage(img, xOffset, yOffset, imgWidth, imgHeight);
+    };
 }
 
 // Starts the game when called
 function startGame() {
-    // Hide the start button
-    document.getElementById("startGameButton").style.display = "none";
-
     // Show the game screen
     document.getElementById("gameScreen").style.display = "block";
 
-    // Initialize the game canvas
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
-
-    // Clear the canvas and display how-to-play instructions
+    // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // PUT GAME LOGIC HERE
+
+    // Load the first random image
+    loadRandomImage();
+
+    // Update gameStarted to true
+    gameStarted = true;
 }
 
-// New Button Objects for Page Three (Positioned at the bottom) made by chatgpt
-const buttonPageThree = [
-  { x: 50, y: canvas.height - 60, width: 150, height: 50, text: "Button 1" },
-  { x: 220, y: canvas.height - 60, width: 150, height: 50, text: "Button 2" },
-  { x: 390, y: canvas.height - 60, width: 150, height: 50, text: "Button 3" },
-  { x: 560, y: canvas.height - 60, width: 150, height: 50, text: "Button 4" }
-];
-
-// Function to draw the third page with four buttons made by Chatgpt
-function drawPageThree() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Title
-  ctx.fillStyle = "#00053E";
-  ctx.font = "40px Arial";
-  ctx.textAlign = "center";
-  ctx.fillText("Welcome to Page Three", canvas.width / 2, 100);
-
-  // Buttons
-  buttonPageThree.forEach((button, index) => {
-    console.log(`Drawing Button ${index + 1}: x=${button.x}, y=${button.y}`); // Debug log
-    ctx.fillStyle = "#00053E";
-    ctx.fillRect(button.x, button.y, button.width, button.height);
-
-    ctx.fillStyle = "#FFC72C";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillText(button.text, button.x + button.width / 2, button.y + button.height / 2);
-  });
-}
-
-
-// Function to handle clicks on the buttons (including page three)
 function handleCanvasClick(event) {
-  const rect = canvas.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
 
-  // Debug: log click position
-  console.log(`Click detected at: x=${x}, y=${y}`);
-
-  // Check if Start Game button was clicked
-  if (
-    x > startButton.x &&
-    x < startButton.x + startButton.width &&
-    y > startButton.y &&
-    y < startButton.y + startButton.height
-  ) {
-    initializeGame();
-  }
-  // Check if instruction start button was clicked
-  else if (
-    x > startGameButton.x &&
-    x < startGameButton.x + startGameButton.width &&
-    y > startGameButton.y &&
-    y < startGameButton.y + startGameButton.height
-  ) {
-    startGame();
-  }
-  // Delegate to the separate Page Three button handler
-  else {
-    handlePageThreeButtonClick(x, y);
-  }
-}
-
-
-// Function to initialize the game, show the instructions, and transition to page three
-function initializeGame() {
-  // Show the game screen
-  document.getElementById("gameScreen").style.display = "block";
-
-  // Clear the canvas and display instructions
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawInstructions(); // Draw the instructions page
-
-  // Change the click event to listen for the "Continue" button
-  canvas.removeEventListener("click", handleCanvasClick);
-  canvas.addEventListener("click", handleContinueClick);
-}
-
-// Function to handle the click event for the "Continue" button
-function handleContinueClick(event) {
-  const rect = canvas.getBoundingClientRect();
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
-  
-  // Check if Continue button was clicked on the instruction page
-  if (
-    x > startGameButton.x &&
-    x < startGameButton.x + startGameButton.width &&
-    y > startGameButton.y &&
-    y < startGameButton.y + startGameButton.height
-  ) {
-    showPageThree(); // Show the third page made by Chatgpt
-    canvas.removeEventListener("click", handleContinueClick);
-    canvas.addEventListener("click", handlePageThreeButtonClick);
-  }
-}
-
-// Function to handle button clicks on Page Three made by Chatgpt
-function handlePageThreeButtonClick(x, y) {
-  console.log(`Checking clicks for Page Three: x=${x}, y=${y}`); // Debug log
-
-  let buttonClicked = false;
-
-  buttonPageThree.forEach((button, index) => {
+    // Check if Start Game button was clicked
     if (
-      x > button.x &&
-      x < button.x + button.width &&
-      y > button.y &&
-      y < button.y + button.height
+        x > startButton.x &&
+        x < startButton.x + startButton.width &&
+        y > startButton.y &&
+        y < startButton.y + startButton.height
     ) {
-      console.log(`Button ${index + 1} clicked!`); // Debug log
-      alert(`Button ${index + 1} is clicked!`); // Popup message
-      buttonClicked = true;
+        initializeGame();
     }
-  });
-
-  if (!buttonClicked) {
-    console.log("Click outside Page Three buttons.");
-  }
+    // Check if instruction start button was clicked
+    else if (
+        x > startGameButton.x &&
+        x < startGameButton.x + startGameButton.width &&
+        y > startGameButton.y &&
+        y < startGameButton.y + startGameButton.height
+    ) {
+        // If the game has started, load the next random image
+        if (gameStarted) {
+            loadRandomImage();
+        } else {
+            startGame();
+        }
+    }
 }
 
-
-// Function to show Page 3 after the "Continue" button is clicked made by Chatgpt
-function showPageThree() {
-  console.log("Transitioning to Page Three..."); // Debug log
-  // Show Page 3 by drawing it on the canvas
-  drawPageThree();
-}
-
-// Call this function to initialize the menu and display the start game
+// Initializes menu buttons
 drawMenu();
 
-// Event listener for canvas clicks
+// Add event listener for canvas clicks
 canvas.addEventListener("click", handleCanvasClick);
