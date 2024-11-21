@@ -8,3 +8,5 @@ JavaScript coding standards:
 * Quotes around string values
 * Short objects can be compressed on one line
 * .js for javascript files
+* work in seperate folders
+* make new forlders when neccessary
