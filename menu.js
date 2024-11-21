@@ -82,11 +82,27 @@ function drawInstructions() {
   ctx.fillText(startGameButton.text, startGameButton.x + 30, startGameButton.y + 30);
 }
 
+ // Function to shuffle an array (Fisher-Yates Shuffle) made by Chatgpt
+ function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+// Predefined unique texts for buttons made by Chatgpt
+const buttonTexts = ["Start", "Pause", "Play", "Reset", "Save", "Load", "Quit", "Retry"];
+
+// Shuffle the texts and pick the first four for the buttons made by Chatgpt
+const uniqueTexts = shuffleArray([...buttonTexts]).slice(0, 4);
+
+// Array of buttons with their properties, including unique text made by Chatgpt
 const buttons = [
-  { id: 1, x: 50, y: 340, width: 150, height: 50, text: "Button 1" },
-  { id: 2, x: 220, y: 340, width: 150, height: 50, text: "Button 2" },
-  { id: 3, x: 390, y: 340, width: 150, height: 50, text: "Button 3" },
-  { id: 4, x: 560, y: 340, width: 150, height: 50, text: "Button 4" }
+  { id: 1, x: 50, y: canvas.height - 60, width: 150, height: 50, text: uniqueTexts[0] },
+  { id: 2, x: 220, y: canvas.height - 60, width: 150, height: 50, text: uniqueTexts[1] },
+  { id: 3, x: 390, y: canvas.height - 60, width: 150, height: 50, text: uniqueTexts[2] },
+  { id: 4, x: 560, y: canvas.height - 60, width: 150, height: 50, text: uniqueTexts[3] }
 ];
 
 // Function to draw the third page with four buttons made by Chatgpt
