@@ -89,7 +89,9 @@ function handleContinueClick(event) {
   // Check if the click is within any of the buttons' bounds
   buttons.forEach((button, index) => {
     if (x > button.x && x < button.x + button.width && y > button.y && y < button.y + button.height) {
+      if(button.id == correctId){
       alert(`You clicked ${button.text}! the id is ${button.id}`);  // Show which button was clicked
+      }
     }
   });
 }
