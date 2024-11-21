@@ -11,7 +11,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Menu button objects
 const startButton = { x: 300, y: 200, width: 200, height: 50, text: "Start Game" };
 const startGameButton = { x: 300, y: 300, width: 200, height: 50, text: "Continue" };
-
+correctId = 0;
 
 // Game canvas object
 const canvas = document.getElementById('gameCanvas');
@@ -117,6 +117,10 @@ function drawPageThree() {
 }
 // Function to draw buttons on the canvas
 function drawButtons() {
+  const randomIndex = Math.floor(Math.random() * buttons.length);
+    buttons[randomIndex].text = 'Correct';
+    correctId = buttons[randomIndex].id;
+
   buttons.forEach((button) => {
     ctx.fillStyle = "#00053E";  // Button color
     ctx.fillRect(button.x, button.y, button.width, button.height);  // Draw button
