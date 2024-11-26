@@ -1,0 +1,32 @@
+<!--
+This document is is the foundation of the webpage.
+It contains the header with the metadata, which supports UTF-8 and dictates the size of the widow.
+It also give the title that will be seen in the browser, and connects to a css style sheet.
+
+The dody contains the header which contains the buttons and the canvas.
+This give the "Start" and "How To Play" buttons, and the canves with a width of 800px nad height of 400px
+
+The footer contains the copyright
+The last section connects the webpage to an external javascript file.  
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buc Eye View</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Game Screen -->
+    <div id="gameScreen">
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+    </div>
+    
+    <script src="js/menu.js"></script>
+    <script src="js/gamelogic.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
