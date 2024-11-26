@@ -136,13 +136,13 @@ function showEndScreen() {
   let feedback = "";
 
   if (score === maxAttempts) {
-    feedback = "Amazing! You got a perfect score!";
+    feedback = "Amazing! You must loooove walking, huh?";
   } else if (score >= maxAttempts * 0.7) {
-    feedback = "Great job! You did really well!";
+    feedback = "Wow, nice.";
   } else if (score >= maxAttempts * 0.4) {
-    feedback = "Not bad, but you can do better!";
+    feedback = "You can do better than that.";
   } else {
-    feedback = "Keep practicing! You'll get it next time!";
+    feedback = "Keep practicing, bozo.";
   }
 
   ctx.fillText(feedback, canvas.width / 2, canvas.height / 1.5);
