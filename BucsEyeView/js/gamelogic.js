@@ -184,12 +184,12 @@ const images = [
   'assets/images/CulpCave.jpg',
   'assets/images/MiniDome.jpg',
   'assets/images/LucilleClementHall.jpg',
-  'assets/images/BurginE.DossettHall.jpg',
+  'assets/images/BurginEDossettHall.jpg',
   'assets/images/ParkingServices',
   'assets/images/ReeseMuseum.jpg',
   'assets/images/TheBell.jpg',
-  'assets/images/Tri-HallField_Gazebo.jpg',
-  'assets/images/William B. Green Jr. Stadium.jpg',
+  'assets/images/TriHallFieldGazebo.jpg',
+  'assets/images/WilliamBGreeneJrStadium.jpg',
   'assets/images/BrinkleyCenterTunnel.png'
 ];
 
