@@ -185,7 +185,6 @@ const images = [
   'assets/images/MiniDome.jpg',
   'assets/images/LucilleClementHall.jpg',
   'assets/images/BurginE.DossettHall.jpg',
-  'assets/images/image1.jpg',
   'assets/images/ParkingServices',
   'assets/images/ReeseMuseum.jpg',
   'assets/images/TheBell.jpg',
