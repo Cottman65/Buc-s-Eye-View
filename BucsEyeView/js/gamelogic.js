@@ -62,6 +62,7 @@ function initializeGame() {
   // Change the click event to listen for the "Continue" button
   canvas.removeEventListener("click", handleCanvasClick);
   canvas.addEventListener("click", handleContinueClick);
+
 }
 
 // Function to handle the click event for the "Continue" button
@@ -87,6 +88,31 @@ function handleContinueClick(event) {
 const maxAttempts = 5;
 let attempt = 1;
 let score = 0;
+
+  
+
+  // Function to shuffle an array (Fisher-Yates Shuffle) made by Chatgpt
+ function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+  }
+
+  // Predefined unique texts for buttons made by Chatgpt
+  const buttonTexts = ["The Cave", "Mini Dome", "Lucille Clemet", "Dossett Hall", "Parking Services", "Reese Museum", "The Bell", "Tri-Hall Field", "Stadium", "The Tunnel"];
+
+  // Shuffle the texts and pick the first four for the buttons made by Chatgpt
+  var uniqueTexts = shuffleArray([...buttonTexts]).slice(0, 4);
+
+  const buttons = [
+    { id: 0, x: 50, y: canvas.height - 60, width: 150, height: 50, text: uniqueTexts[0] },
+    { id: 1, x: 220, y: canvas.height - 60, width: 150, height: 50, text: uniqueTexts[1] },
+    { id: 2, x: 390, y: canvas.height - 60, width: 150, height: 50, text: uniqueTexts[2] },
+    { id: 3, x: 560, y: canvas.height - 60, width: 150, height: 50, text: uniqueTexts[3] }
+  ];
+
 
 // Function to handle canvas clicks on page three
 function handlePageThreeButtonClick(event) {
@@ -197,7 +223,8 @@ const images = [
 function drawRandomImage() {
   const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
-  const randomImage = images[Math.floor(Math.random() * images.length)];
+  const randomNum = Math.floor(Math.random() * images.length);
+  const randomImage = images[randomNum];
   const img = new Image();
 
   img.onload = function () {
@@ -211,24 +238,9 @@ function drawRandomImage() {
     ctx.drawImage(img, x, y);
 
     // Now, draw the buttons on top of the image
-    drawPageThreeButtons(); // Function to draw existing buttons on top of the image
+    drawButtons(randomNum); // Function to draw existing buttons on top of the image
   };
 
   img.src = randomImage; // Start loading the image
 }
 
-// Function to draw the existing buttons on page three (on top of the image)
-function drawPageThreeButtons() {
-  const canvas = document.getElementById("gameCanvas");
-  const ctx = canvas.getContext("2d");
-
-  buttons.forEach((button) => {
-    ctx.fillStyle = "#00053E";  // Button color
-    ctx.fillRect(button.x, button.y, button.width, button.height);  // Draw button
-    ctx.fillStyle = "#FFC72C";  // Text color
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.font = "20px Arial";
-    ctx.fillText(button.text, button.x + button.width / 2, button.y + button.height / 2);  // Draw text on button
-  });
-}
