@@ -219,11 +219,32 @@ const images = [
   'assets/images/BrinkleyCenterTunnel.png'
 ];
 
-// Function to draw a randomized image on the canvas
+let shownImages = [];
+
 function drawRandomImage() {
   const canvas = document.getElementById("gameCanvas");
   const ctx = canvas.getContext("2d");
-  const randomNum = Math.floor(Math.random() * images.length);
+
+  // Get a random image index that has not been shown before
+  let randomNum;
+  do {
+    randomNum = Math.floor(Math.random() * images.length);
+  } while (shownImages.includes(randomNum)); // Repeat if the image has been shown
+
+  // Add the selected random image to the shownImages array
+  shownImages.push(randomNum);
+
+  // Check if all images have been shown
+  if (shownImages.length === images.length) {
+    console.log("All images have been shown.");
+    // Trigger action when all images have been shown (e.g., show a message)
+    alert("All images have been shown!"); // Replace with your preferred action
+    
+    // Optionally, reset the images for another round or stop further image drawing
+    shownImages = []; // Comment this to stop game
+    // Or, you could disable the button, stop the game, etc.
+  }
+
   const randomImage = images[randomNum];
   const img = new Image();
 
@@ -238,9 +259,8 @@ function drawRandomImage() {
     ctx.drawImage(img, x, y);
 
     // Now, draw the buttons on top of the image
-    drawButtons(randomNum); // Function to draw existing buttons on top of the image
+    drawButtons(randomNum); // Draw the buttons with the correct text
   };
 
   img.src = randomImage; // Start loading the image
 }
-
